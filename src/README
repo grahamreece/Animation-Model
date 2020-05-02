@@ -1,0 +1,65 @@
+The implementation of the animation model is represented in the IModel interface. The IModel
+interface represents an animation that includes motions of shapes. The model class represents a
+simple implementation of the IModel interface. The model representation includes a list of shapes
+and a list of motions. The motions include the motions for the shapes in the model. A motion for a
+specific shape cannot exist without the specific shape already in the model. The model animates and
+draws the shapes and their motions at every tick to create an animation.
+
+The IMotion interface represents a motion for a shape. The motion class represents a simple
+implementation of the IMotion interface. A motion includes the starting and end tick, the starting
+shape to represent the state of the shape at the starting tick, and the ending shape to represent
+the state of the shape at the ending tick. A motion also includes a motion ID, so that the model
+can identify a specific motion at any time and can check if a motion already exists in the model.
+
+The IShape interface represents a shape. A shape is determined with it's shape type, position,
+dimension, color, the shape's name, and the shape ID. Every shape in the model requires all these
+elements. The position represents the x and y coordinates of the shape. The dimension represents
+the width and height of the shape. The color represents the RGB color of the shape. The shape name
+groups all the different states of shapes with different shape identifiers together. This is because
+the motion includes two shapes, with the same shape name but different shape identifiers (because
+the shape will change throughout the motion). The shape identifier makes every shape unique, so that
+a shape can go through different states in an animation/motion.
+
+The AShape abstract class represents the abstracted implementation of the IShape interface. AShape
+holds the common elements for every shape, including the type of shape, dimension, position, color,
+shape name, and a shape ID. It also holds a constructor for all of these elements.
+
+The ShapeType enum is created to identify different extensions of the abstract AShape class. It is
+used to identify different (types of) shapes when they are implemented.
+
+The MyRectangle class represents an extension of the AShape abstract class. This class holds a 2D
+class representation of a rectangle. The class initializes the shape type to be an enumeration of
+a RECTANGLE.
+
+The MyEllipse class represents an extension of the AShape abstract class. This class holds a 2D
+class representation of a ellipse. The class initializes the shape type to be an enumeration of
+a ELLIPSE.
+
+Each class implementation, including the abstract class, holds getters and setters for every field.
+This is done because the model, motion, and shapes should be able to access these elements without
+having to call field for field. Additionally, the fields should either private or protected to
+avoid alterations of fields and to improve encapsulation. This is also done so that the viewer and
+controller can also access these elements (viewer and controller will be implemented in the future).
+
+We were provided with limited knowledge on the animation. Thus, we did not implement the actual
+drawings of the shapes, motions, and the model. The drawing requires a controller to be
+animated/drawn and to use the graphics. The information we were given is that the model draws
+all the shapes and motions at every tick, to build an animation. These are all documented in the
+code via javaDoc.
+
+
+**** CHANGES SINCE ASSIGNMENT 5 ***
+
+We've implemented code that denies the user from deleting a motion or shape that causes
+inconsistency in the model. Additionally, we made it so that when the user adds a shape or motion,
+it should keep the motions in the model/animation consistent. In other words, a motion or shape
+cannot be deleted if it is causes time interval gaps, and a motion or shape must have matching
+end and start states.
+
+Helper functions for ^
+
+builder in Model class. talk about utils too (AnimationBuilder, AnimationReader)
+
+new fields for model. getters and setters
+
+width height has to be greater than 0. tick has to be 0 or greater (in int form).
